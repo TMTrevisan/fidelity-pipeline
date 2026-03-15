@@ -1,0 +1,147 @@
+{
+    "paths": {
+        "downloads": "downloads",
+        "reports": "reports",
+        "data": "data",
+        "db": "data/research.db"
+    },
+    "extraction": {
+        "max_chars_per_report": 50000,
+        "truncate_at_sentence": true,
+        "model": "gemini-2.5-flash-lite",
+        "temperature": 0.1
+    },
+    "chrome_relay": {
+        "ws_base": "ws://127.0.0.1:18792/cdp",
+        "token": "84b5e26230b9a2a142ff5a386dae425f41b73554d302948d",
+        "argus_url_pattern": "Argus.asp",
+        "zacks_url_pattern": "ZacksResearch.asp"
+    },
+    "sources": {
+        "argus": {
+            "name": "Argus Research",
+            "base_url": "https://research2.fidelity.com",
+            "reports": {
+                "market_digest": {
+                    "type_code": "1463MD",
+                    "name": "Market Digest",
+                    "frequency": "daily",
+                    "priority": "high",
+                    "description": "Analyst Notes: rating changes, price target updates, earnings news"
+                },
+                "market_watch": {
+                    "type_code": "1463MW",
+                    "name": "Market Watch",
+                    "frequency": "daily",
+                    "priority": "high",
+                    "description": "Market commentary + StockPicker's Corner stock idea"
+                },
+                "market_movers": {
+                    "type_code": "1463MM",
+                    "name": "Market Movers",
+                    "frequency": "daily",
+                    "priority": "high",
+                    "description": "Technical picks positioned for gains over next month"
+                },
+                "market_update": {
+                    "type_code": "1463MU",
+                    "name": "Market Update",
+                    "frequency": "daily_midday",
+                    "priority": "high",
+                    "description": "Midday market update with updated Analyst Notes"
+                },
+                "weekly_staff_report": {
+                    "type_code": "1463WSR",
+                    "name": "Weekly Staff Report",
+                    "frequency": "weekly",
+                    "priority": "medium",
+                    "description": "Market-based commentary, economic/market/technical forecasts"
+                },
+                "weekly_options_watch": {
+                    "type_code": "1463WOW",
+                    "name": "Weekly Options Watch",
+                    "frequency": "weekly",
+                    "priority": "low",
+                    "description": "Options strategies: spreads, volume, volatility, trade of the week"
+                },
+                "portfolio_selector": {
+                    "type_code": "1463PS",
+                    "name": "Portfolio Selector",
+                    "frequency": "monthly",
+                    "priority": "medium",
+                    "description": "Focus List of timely analyst ideas, sector recommendations"
+                },
+                "sector_watch": {
+                    "type_code": "1463MSW",
+                    "name": "Sector Watch",
+                    "frequency": "monthly",
+                    "priority": "medium",
+                    "description": "11 sector ratings: Market Weight, Overweight, Underweight"
+                },
+                "special_situations": {
+                    "type_code": "1463SPC",
+                    "name": "Special Situations",
+                    "frequency": "periodic",
+                    "priority": "low",
+                    "description": "Investment themes: dividends, sustainable investing, etc."
+                }
+            },
+            "download_url_template": "{base_url}/pi/report/GetReport?type={type_code}"
+        },
+        "zacks": {
+            "name": "Zacks Investment Research",
+            "base_url": "https://research2.fidelity.com",
+            "page_url": "https://research2.fidelity.com/fidelity/research/reports/release2/Research/ZacksResearch.asp",
+            "feed_ids": {
+                "main": 572,
+                "industry": 576
+            },
+            "reports": {
+                "economic_outlook": {
+                    "doc_tag_pattern": "Monthly_Economic_Outlook_{date}",
+                    "feed_id": 572,
+                    "name": "Economic Outlook",
+                    "frequency": "monthly",
+                    "priority": "medium"
+                },
+                "market_strategy": {
+                    "doc_tag_pattern": "Market_Strategy_Commentary_{date}",
+                    "feed_id": 572,
+                    "name": "Market Strategy",
+                    "frequency": "monthly",
+                    "priority": "medium"
+                },
+                "focus_list": {
+                    "doc_tag_pattern": "Weekly_Model_Portfolio-Focus_List_{date}",
+                    "feed_id": 572,
+                    "name": "Focus List",
+                    "frequency": "weekly",
+                    "priority": "high"
+                },
+                "industry_outlook": {
+                    "doc_tag_pattern": "{date}T{n}",
+                    "feed_id": 576,
+                    "name": "Industry Outlook",
+                    "frequency": "daily",
+                    "priority": "medium"
+                }
+            }
+        }
+    },
+    "retention": {
+        "pdf_days": 7,
+        "markdown_days": -1,
+        "db_days": -1
+    },
+    "telegram": {
+        "chat_id": "-1003897839776",
+        "topic_id": "32"
+    },
+    "schedule": {
+        "first_attempt": "06:30",
+        "retry_1": "07:00",
+        "retry_2": "07:30",
+        "final_summary": "07:35",
+        "timezone": "America/Los_Angeles"
+    }
+}
