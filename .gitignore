@@ -19,3 +19,9 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Environments
+.env
+.env.local
+.env.*
+!.env.example
